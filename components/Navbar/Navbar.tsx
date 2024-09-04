@@ -1,17 +1,40 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 export default function Navbar() {
   const [nav, setNav] = useState<boolean>(false);
-  const [color, setColor] = useState<string>("black");
-  const [textColor, setTextColor] = useState<string>("black");
 
   const handleNav = () => {
     setNav(!nav);
   };
+
+  const pathname = usePathname();
+
+  const navLinks = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "About me",
+      link: "/about",
+    },
+    {
+      name: "contact",
+      link: "/contact",
+    },
+    {
+      name: "Projects",
+      link: "/projects",
+    },
+    {
+      name: "Resume",
+      link: "/resume",
+    },
+  ];
 
   return (
     <div
@@ -19,26 +42,25 @@ export default function Navbar() {
       className="fixed left-0 top-0 w-full z-20 ease-in duration-200"
     >
       <div className="sm:flex justify-center items-center hidden border-b-2">
-        <div
-          className="flex justify-between items-center text-black"
-              
-        >
-          <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
-            <li className="p-4">
-              <Link href="/#hero">Home</Link>
-            </li>
-            <li className="p-4">
-              <Link href="/#about">About me</Link>
-            </li>
-            <li className="p-4">
-              <Link href="/#demo">Contact</Link>
-            </li>
-            <li className="p-4">
-              <Link href="/#testimonials">Projects</Link>
-            </li>
-            <li className="p-4">
-              <Link href="/#faq">Resume</Link>
-            </li>
+        <div className="flex justify-between items-center">
+          <ul
+            style={{ color: "black" }}
+            className="hidden sm:flex justify-between sm:min-w-[600px] lg:min-w-[1000px]"
+          >
+            {navLinks.map(({ link, name }) => {
+              return (
+                <li key={name} className="p-4">
+                  <Link
+                    className={`${
+                      pathname === link ? "text-black" : "text-gray-400"
+                    }`}
+                    href={link}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
@@ -49,7 +71,7 @@ export default function Navbar() {
           {nav ? (
             <AiOutlineClose size={20} style={{ color: "white" }} />
           ) : (
-            <AiOutlineMenu size={20} style={{ color: `${textColor}` }} />
+            <AiOutlineMenu size={20} style={{ color: "black" }} />
           )}
         </div>
       </div>
@@ -62,21 +84,13 @@ export default function Navbar() {
         }
       >
         <ul>
-          <li onClick={handleNav} className="p-4 text-4xl hover:text-gray-500">
-            <Link href="/home">Home</Link>
-          </li>
-          <li onClick={handleNav} className="p-4 text-4xl hover:text-gray-500">
-            <Link href="/#about">About me</Link>
-          </li>
-          <li onClick={handleNav} className="p-4 text-4xl hover:text-gray-500">
-            <Link href="/#demo">Contact</Link>
-          </li>
-          <li onClick={handleNav} className="p-4 text-4xl hover:text-gray-500">
-            <Link href="/#testimonials">Projects</Link>
-          </li>
-          <li onClick={handleNav} className="p-4 text-4xl hover:text-gray-500">
-            <Link href="/#contact">Resume</Link>
-          </li>
+          {navLinks.map(({ link, name }) => {
+            return (
+              <li onClick={handleNav} key={name} className="p-4 text-4xl">
+                <Link href={link}>{name}</Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
