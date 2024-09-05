@@ -23,7 +23,7 @@ export default function Navbar() {
       link: "/about",
     },
     {
-      name: "contact",
+      name: "Contact",
       link: "/contact",
     },
     {

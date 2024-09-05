@@ -13,10 +13,9 @@ export default function Hero() {
         </p>
         <div className="flex justify-center">
           <p className="text-gray-600 w-[80%] sm:w-[300px]">
-            Hi, I'm a Frontend Developer with 3 years of experience creating
+            Hi, I'm a Full stack web developer with 3 years of experience creating
             sleek, responsive websites. I love turning ideas into interactive,
-            user-friendly digital experiences using HTML, CSS, JavaScript,
-            Reactjs, Typescript and Nextjs.
+            user-friendly digital experiences.
           </p>
         </div>
         <button className="bg-black text-white p-1 rounded-lg mt-5 w-[260px] sm:w-[300px]">
